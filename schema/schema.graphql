@@ -1,0 +1,61 @@
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  imageUrl: String!
+}
+
+type CartItem {
+  id: ID!
+  product: Product!
+  quantity: Int!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  cartItems: [CartItem!]!
+}
+
+type Query {
+  products: [Product!]!
+  product(id: ID!): Product
+  user(id: ID!): User
+}
+
+type Mutation {
+  createProduct(
+    name: String!
+    description: String!
+    price: Float!
+    imageUrl: String!
+  ): Product!
+  updateProduct(
+    id: ID!
+    name: String
+    description: String
+    price: Float
+    imageUrl: String
+  ): Product!
+  deleteProduct(id: ID!): ID!
+  createUser(
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+  ): User!
+  updateUser(
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+  ): User!
+  addToCart(productId: ID!, quantity: Int!): CartItem!
+  updateCartItem(id: ID!, quantity: Int!): CartItem!
+  removeFromCart(id: ID!): ID!
+}
